@@ -1,0 +1,111 @@
+<section class="flex flex-row">
+    <div>
+        <app-sidebar></app-sidebar>
+    </div>
+    <div class="flex flex-col border-l-4 border-rose-700">
+        <div class="bg-rose-800">
+            <div class="container mx-auto py-8 pl-10">
+                <!-- <h1 class="text-4xl text-white font-bold mb-4">Welcome to our Student Residence Dashboard!</h1>
+              <p class="text-lg text-white mb-6">Discover Your Perfect Room for the Semester</p>
+              <hr class="border-b-2 border-white my-6"> -->
+
+                <div class="flex flex-wrap">
+                    <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-6">
+                        <h2 class="text-2xl text-white font-bold mb-2">Book Your Dream Room</h2>
+                        <p class="text-white text-opacity-75 mb-4">Choose from a variety of comfortable and modern rooms
+                            tailored to your needs.</p>
+                        <a class="bg-white text-sky-800 py-2 px-4 rounded-full font-bold hover:bg-sky-300 hover:text-white transition-colors duration-300 ease-in-out"
+                            href="#" role="button">Explore Rooms</a>
+                    </div>
+                    <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 mb-6">
+                        <h2 class="text-2xl text-white font-bold mb-2">Connect with Roommates</h2>
+                        <p class="text-white text-opacity-75 mb-4">Join a vibrant community of students and make lasting
+                            connections during your stay.</p>
+                        <a class="bg-white text-sky-800 py-2 px-4 rounded-full font-bold hover:bg-sky-300 hover:text-white transition-colors duration-300 ease-in-out"
+                            href="#" role="button">Find Roommates</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col">
+            <!-- <div class="bg-gray-200 p-4">
+                <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-md" placeholder="Search for rooms" />
+            </div> -->
+            <div class="bg-gray-200 p-4 flex items-center">
+                <select class="w-full px-4 py-2 border border-gray-300 rounded-md">
+                    <option disabled selected hidden>Select a floor</option>
+                    <option>Ground Floor</option>
+                    <option>Floor 1</option>
+                    <option>Floor 2</option>
+                </select>
+                <button class="ml-2 px-3 py-2 bg-gray-300 text-gray-700 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M14.829 12.586a7.5 7.5 0 111.415-1.415l3.792 3.791a1 1 0 11-1.414 1.414l-3.793-3.79zm-5.35.006a5.5 5.5 0 100-11 5.5 5.5 0 000 11z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="flex flex-wrap justify-center">
+                <ng-container *ngFor="let i of [0, 1, 2, 3, 4, 5, 6, 8]">
+                    <div (click)="toggleModel()" class="w-64 m-4 p-4 bg-white shadow-md rounded-lg">
+                        <h2 class="text-xl font-semibold">Room {{ i + 1 }}</h2>
+                        <!-- <p class="text-gray-600">Room description goes here...</p> -->
+                        <p>
+                            Type:
+                            <ng-container *ngIf="i % 2 === 0; else twoInRoom">
+                                3-in-a-room
+                            </ng-container>
+                            <ng-template #twoInRoom>
+                                2-in-a-room
+                            </ng-template>
+                        </p>
+                        <p class="mt-2">
+                            <span class="px-2 mx-1 bg-white border-2 border-black rounded-full font-semibold">
+                                <span class="text-gray-700 text-sm" title="TV">TV 📺</span>
+                            </span>
+                            <span class="px-2 mx-1 bg-white border-2 border-black rounded-full font-semibold">
+                                <span class="text-gray-700 text-sm" title="Fridge">Fridge 🧊</span>
+                            </span>
+                            <span class="px-2 mx-1 bg-white border-2 border-black rounded-full font-semibold">
+                                <span class="text-gray-700 text-sm" title="Fan">Fan 🪭</span>
+                            </span>
+                            <span class="px-2 mx-1 bg-white border-2 border-black rounded-full font-semibold">
+                                <span class="text-gray-700 text-sm" title="Kitchen">Kitchen 🧑🏽‍🍳</span>
+                            </span>
+                            <span class="px-2 mx-1 bg-white border-2 border-black rounded-full font-semibold">
+                                <span class="text-gray-700 text-sm" title="Bathroom">Bathroom 🛁</span>
+                            </span>
+                        </p>
+                    </div>
+
+                    <!-- Modal -->
+                    <div 
+                        class="fixed inset-0 flex items-center justify-center z-50 bg-transparent backdrop-blur-md"
+                        *ngIf="isModalOpen"
+                        (click)="closeModal($event)"
+                    >
+                        <div class="bg-white p-6 rounded-md max-w-md" (click)="preventClose($event)">
+                            <h2 class="text-xl font-semibold">Room {{ i + 1 }}</h2>
+                            <p class="mt-2">{{ roomDescription }}</p>
+
+                            <h3 class="mt-4 text-lg font-semibold">Interested People:</h3>
+                            <ul class="mt-2">
+                                <li *ngFor="let person of interestedPeople">{{ person.alias }}</li>
+                            </ul>
+
+                            <button class="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md" (click)="showInterests()">
+                                Show Interests
+                            </button>
+
+                            <button class="mt-4 px-4 py-2 bg-green-500 text-white rounded-md" (click)="bookRoom()">
+                                Book Room and Proceed to Payment
+                            </button>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</section>
