@@ -1,0 +1,49 @@
+<section class="h-screen bg-slate-200" style="width: calc(100vw - 16rem);">
+    <div class="flex justify-center items-center h-screen">
+        <div class="bg-white px-20 rounded mx-20">
+            <div *ngFor="let room of rooms" class="rounded-md px-4 py-9 flex flex-row">
+                <div class="room-details ">
+                    <div class="room-header flex items-center justify-between cursor-pointer">
+                        <h2 class="text-lg font-bold">{{ room.name }}</h2>
+                        <span class="px-2 m-1 bg-white font-semibold">
+                            <span class="text-gray-700 text-sm">Status: Confirmed ✅</span>
+                        </span>
+                    </div>
+                  <p class="text-gray-600 mt-2">Capacity: {{ room.capacity }}</p>
+                  <p class="text-gray-600">Location: {{ room.location }}</p>
+                  <p class="text-gray-600">
+                    Welcome to our cozy accommodation! Our room features [number of beds] comfortable beds, perfect for a restful night's sleep. You'll also find a [fridge availability] fridge available for storing your snacks and beverages. Enjoy your favorite shows and movies on the [TV availability] TV provided in the room.
+                    For your convenience, there is a [bathroom availability] bathroom attached to the room, equipped with all the necessary amenities. If you love cooking, you'll be pleased to know that there is a [kitchen availability] kitchen available, where you can prepare your meals with ease. To keep you cool and comfortable, the room is equipped with a [fan availability] fan.
+                    We aim to provide a comfortable and enjoyable stay, ensuring that you have everything you need for a pleasant experience.
+                  </p>
+                  <ul class="mt-2">
+                    <li>
+                        <u>Roomie 1</u>
+                        <u>Roomie 2</u>
+                    </li>
+                </ul>
+                    <p class="mt-2 flex flex-wrap">
+                        <span class="px-2 m-1 bg-white border-2 border-black rounded-full font-semibold">
+                            <span class="text-gray-700 text-sm" title="TV">TV 📺</span>
+                        </span>
+                        <span class="px-2 m-1 bg-white border-2 border-black rounded-full font-semibold">
+                            <span class="text-gray-700 text-sm" title="Fridge">Fridge 🧊</span>
+                        </span>
+                        <span class="px-2 m-1 bg-white border-2 border-black rounded-full font-semibold">
+                            <span class="text-gray-700 text-sm" title="Fan">Fan 🪭</span>
+                        </span>
+                        <span class="px-2 m-1 bg-white border-2 border-black rounded-full font-semibold">
+                            <span class="text-gray-700 text-sm" title="Kitchen">Kitchen 🧑🏽‍🍳</span>
+                        </span>
+                        <span class="px-2 m-1 bg-white border-2 border-black rounded-full font-semibold">
+                            <span class="text-gray-700 text-sm" title="Bathroom">Bathroom 🛁</span>
+                        </span>
+                    </p>
+                </div>
+                <!-- <div class="ml-10 h-[30rem] w-96 bg-green-600">
+                    <img class="object-fill w-full h-full" src="https://images.unsplash.com/photo-1486304873000-235643847519?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2232&q=80" alt="room"/>
+                </div> -->
+            </div>    
+        </div>
+    </div>  
+</section>
