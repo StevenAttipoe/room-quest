@@ -26,4 +26,9 @@ export class SidebarComponent {
     this.selectedView = view;
     this.viewSelected.emit(view);
   }
+
+  signOut(): void {
+    localStorage.removeItem('jwtToken');  
+    console.log('Sign out called');
+  }
 }

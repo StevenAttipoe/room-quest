@@ -34,7 +34,7 @@ rooms: Room[] = [];
   }
 
   getRoomsListing() {
-    this.http.get<Room[]>(environment.BASE_URL  + '/room').subscribe(
+    this.http.get<Room[]>(environment.BASE_URL  + '/room/get/all').subscribe(
       (rooms: Room[]) => {
         this.rooms = rooms;
         console.log('Room listings successfully retrieved.', rooms);

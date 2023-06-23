@@ -9,44 +9,70 @@
             </div>
         </div>
         
-        <form *ngIf="isLoginSelected !== null && !isLoginSelected">
+        <form [formGroup]="sigUpForm" (ngSubmit)=signUpUser(sigUpForm) *ngIf="isLoginSelected !== null && !isLoginSelected">
           <h2 class="text-3xl font-bold mb-4">Sign Up</h2>
           <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="fullName">FullName</label>
+            <input formControlName = "fullName" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-rose-500" id="fullName" type="name" placeholder="Full Name">
+            <div *ngIf="sigUpForm.get('fullName')!.invalid && sigUpForm.get('fullName')!.touched" class="text-sm text-red-500">
+              Full Name is required.
+            </div>
+          </div>
+          <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-rose-500" id="email" type="email" placeholder="Email">
+            <input formControlName = "email" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-rose-500" id="email" type="email" placeholder="Email">
+              <div *ngIf="sigUpForm.get('email')!.invalid && sigUpForm.get('email')!.touched" class="text-sm text-red-500">
+                Email is required and must be a valid email address.
+              </div>
           </div>
           <div class="mb-6">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-rose-500" id="password" type="password" placeholder="Password">
+            <input formControlName = "password" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-rose-500" id="password" type="password" placeholder="Password">
+              <div *ngIf="sigUpForm.get('password')?.invalid && sigUpForm.get('password')?.touched" class="text-sm text-red-500">
+                Password is required and must be at least 6 characters long.
+              </div>
           </div>
           <div class="mb-6">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Confirm Password</label>
-            <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-rose-500" id="password" type="password" placeholder="Password">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="confirmPassword">Confirm Password</label>
+            <input formControlName = "confirmPassword" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-rose-500" id="confirmPassword" type="password" placeholder="Confirm Password">
+              <div *ngIf="sigUpForm.get('confirmPassword')!.invalid && sigUpForm.get('confirmPassword')!.touched" class="text-sm text-red-500">
+                Password is required and must be at least 6 characters long.
+              </div>
           </div>
+
+          <div *ngIf="isPasswordMacthed !== null && !isPasswordMacthed" class="text-sm text-red-500">
+            Passwords  Mismatch!
+          </div>
+
           <div class="flex items-center justify-between">
-            <button class="bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Sign Up</button>
+            <button (click)=signUpUser(sigUpForm) class="bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Sign Up</button>
           </div>
+          
           <p (click)="toggleForm(true)" class="text-sm text-gray-700 mt-4">Have an account? <button class="text-rose-500 font-bold">Sign In</button></p>
         </form>
 
-        <form *ngIf="isLoginSelected !== null && isLoginSelected">
+        <form [formGroup]="signInForm" (ngSubmit)=signInUser(signInForm) *ngIf="isLoginSelected !== null && isLoginSelected">
             <h2 class="text-3xl font-bold mb-4">Login</h2>
             <div class="mb-4">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
-              <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-rose-500" id="email" type="email" placeholder="Email">
+              <input formControlName = "email" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-rose-500" id="email" type="email" placeholder="Email">
             </div>
             <div class="mb-6">
               <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-              <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-rose-500" id="password" type="password" placeholder="Password">
+              <input formControlName = "password" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:border-rose-500" id="password" type="password" placeholder="Password">
             </div>
+
+            <div *ngIf="isWrongCredentials === true" class="text-sm text-red-500">
+              Incorrect email or password!
+            </div>
+
             <div class="flex items-center justify-between">
-              <button routerLink="/dashboard" class="bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Sign In</button>
+              <button (click)=signInUser(signInForm)  class="bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Sign In</button>
               <a class="inline-block align-baseline font-bold text-sm text-rose-500 hover:text-rose-800" href="#">Forgot Password?</a>
             </div>
             <p class="text-sm text-gray-700 mt-4 hover:click">Don't have an account? <button (click)="toggleForm(false)" class="text-rose-500 font-bold "> Sign Up </button> </p>
         </form>
 
-        <!-- <button class="absolute left-1/3 top-1 ml-44 mt-5 bg-slate-600 text-white font-bold py-2 px-4 rounded"> x </button> -->
       </div>
 
     <div class="w-1/2 h-screen flex items-center justify-center">
